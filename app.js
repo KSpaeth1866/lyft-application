@@ -8,7 +8,7 @@ arguments “x” and “y” and returns a JSON object {“sum”: x+y}."
 
 */
 
-// express backend
+// express server
 const express = require('express');
 const app = express();
 
@@ -19,12 +19,23 @@ app.use(bodyParser.json());
 
 // test route
 // takes "x", "y", sends back {sum: x+y}
+// x and y are not optional
+// x and y must be integers
 app.post('/test', (req, res) => {
-  res.send({sum: parseFloat(req.body.x) + parseFloat(req.body.y)})
+  if (req.body.x && req.body.y) {
+    res.send({
+      sum: parseInt(req.body.x) + parseInt(req.body.y)
+    })
+  }
+  else {
+    res.send({
+      message: `The browser (or proxy) sent a request that this server could not understand.`
+    })
+  }
 })
 
 // read port or set to 3000, launch server
-let port = process.env.PORT || 3000
+let port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(
     `
