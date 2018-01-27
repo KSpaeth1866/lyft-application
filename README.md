@@ -4,6 +4,7 @@
 [Software Engineering Apprenticeship](https://www.lyft.com/jobs/software-engineering-apprenticeship)
 
 ## Description
+<<<<<<< HEAD
 From the application:
 "A small web application in one of the above languages (Python/Ruby/Node). It only needs to accept a POST request to the route “/test” which accepts two arguments “x” and “y” and returns a JSON object {“sum”: x+y}."
 
@@ -24,3 +25,6 @@ The original application has the following properties, which we replicate.
   1. {x: 4, y: -2.5} => {sum: 2}
 1. Additional arguments are allowed but do not affect the result
   1. {x: 4, y: 2, z: 5} => {sum: 6}
+=======
+"A small web application in one of the above languages (Python/Ruby/Node). It only needs to accept a POST request to the route “/test” which accepts two arguments “x” and “y” and returns a JSON object {“sum”: x+y}."
+>>>>>>> 30ad0348b02a42973208939c8a0a223824070d3a
