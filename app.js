@@ -26,9 +26,11 @@ app.post('/test', (req, res) => {
 // read port or set to 3000, launch server
 let port = process.env.PORT || 3000
 app.listen(port, () => {
-  console.log(`
+  console.log(
+    `
     \n\n****************************************\n\n
     \tApp running on port ${port}
     \n\n****************************************\n\n
-  `)
+    `
+  )
 })
