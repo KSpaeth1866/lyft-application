@@ -4,7 +4,6 @@
 [Software Engineering Apprenticeship](https://www.lyft.com/jobs/software-engineering-apprenticeship)
 
 ## Description
-<<<<<<< HEAD
 From the application:
 "A small web application in one of the above languages (Python/Ruby/Node). It only needs to accept a POST request to the route “/test” which accepts two arguments “x” and “y” and returns a JSON object {“sum”: x+y}."
 
@@ -14,7 +13,7 @@ In the terminal:
 1. Run `npm install`
 1. Run `npm test`
 
-Then submit a Post request (Postman is a good tool for this) to (http://localhost:3000/test) (the app defaults to port 3000, if you alter process.env.port this will change) with two arguments, x and y
+Then submit a Post request (Postman is a good tool for this) to http://localhost:3000/test (the app defaults to port 3000, if you alter process.env.port this will change) with two arguments, x and y
 
 ## Notes on the original application
 The original application has the following properties, which we replicate.
