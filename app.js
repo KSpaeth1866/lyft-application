@@ -6,6 +6,9 @@ Technical sample for Lyft application
 It only needs to accept a POST request to the route “/test” which accepts two
 arguments “x” and “y” and returns a JSON object {“sum”: x+y}."
 
+curl -X POST https://lyft-interview-test.herokuapp.com/test --data '{"x": 4, "y": 2}' -H 'Content-Type: application/json'
+curl -X POST http://localhost:3000/test --data '{"x": 4, "y": 2}' -H 'Content-Type: application/json'
+
 */
 
 // express server
@@ -19,23 +22,31 @@ app.use(bodyParser.json());
 
 // test route
 // takes "x", "y", sends back {sum: x+y}
-// x and y are not optional
-// x and y must be integers
+// see "Notes on the original application" in Readme for specific details
 app.post('/test', (req, res) => {
-  if (req.body.x && req.body.y) {
-    res.send({
+  console.log(req.body.x, parseInt(req.body.x), typeof req.body.x);
+  console.log(req.body.y, parseInt(req.body.y), typeof req.body.y);
+  if (parseInt(req.body.x) && parseInt(req.body.y)) {
+    res.status(200).send({
       sum: parseInt(req.body.x) + parseInt(req.body.y)
     })
   }
   else {
-    res.send({
+    res.status(400).send({
       message: `The browser (or proxy) sent a request that this server could not understand.`
     })
   }
 })
 
+
+app.use('/test', (req, res) => {
+  res.status(405).send({
+    message: "The method is not allowed for the requested URL."
+  })
+})
+
 // read port or set to 3000, launch server
-let port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(
     `

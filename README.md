@@ -20,8 +20,14 @@ The original application has the following properties, which we replicate.
 1. x and y are not optional arguments
     1. {x: 4} -> {message: The browser (or proxy) sent a request that this server could not understand.}
 1. x and y can be floats, but "sum" is an integer
-    1. {x: 4, y: 2.5} -> {sum: 6}
+    1. {x: 4, y: <b>2.5</b>} -> {sum: 6}
 1. x and y can be negative
-    1. {x: 4, y: -2.5} -> {sum: 2}
+    1. {x: 4, y: <b>-2.5</b>} -> {sum: 2}
 1. Additional arguments are allowed but do not affect the result
-    1. {x: 4, y: 2, z: 5} -> {sum: 6}
+    1. {x: 4, y: 2, <b>z: 5</b>} -> {sum: 6}
+1. x and y <b>cannot</b> be strings, only explicit whole number values
+    1. {x: <b>"4"</b>, y: 2} -> {message: The browser (or proxy) sent a request that this server could not understand.}
+    1. {x: <b>"-4"</b>, y: 2} -> {message: The browser (or proxy) sent a request that this server could not understand.}
+    1. {x: <b>"4.2"</b>, y: 2} -> {message: The browser (or proxy) sent a request that this server could not understand.}
+    1. {x: <b>"-4.2"</b>, y: 2} -> {message: The browser (or proxy) sent a request that this server could not understand.}
+    1. {x: <b>"d"</b>, y: 2} -> {message: The browser (or proxy) sent a request that this server could not understand.}
