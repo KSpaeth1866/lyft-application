@@ -16,16 +16,31 @@ In the terminal:
 Then submit a Post request (Postman is a good tool for this) to http://localhost:3000/test (the app defaults to port 3000, if you alter process.env.port this will change) with two arguments, x and y
 
 ## Notes on the original application
-Through exploration with Postman, the original application appeared to have the following properties, which we replicate.
-1. x and y are not optional arguments
-    1. {x: 4} -> {message: The browser (or proxy) sent a request that this server could not understand.}
-1. x and y can be floats, but "sum" is an integer
-    1. {<b>x: 2.5</b>, y: 4} -> {sum: 6}
-1. x and y can be negative
-    1. {<b>x: -2.5</b>, y: 4} -> {sum: 2}
+Through exploration with Postman, the original application appeared to have the following properties.
 1. Additional arguments are allowed but do not affect the result
-    1. {x: 4, y: 2, <b>z: 5</b>} -> {sum: 6}
-1. x and y <i>cannot</i> be strings, only explicit whole number values
-    1. {<b>x: "4"</b>, y: 2} -> {message: The browser (or proxy) sent a request that this server could not understand.}
-    1. {<b>x: "-4.2"</b>, y: 2} -> {message: The browser (or proxy) sent a request that this server could not understand.}
-    1. {<b>x: "d"</b>, y: 2} -> {message: The browser (or proxy) sent a request that this server could not understand.}
+    1. `{x: 4, y: 2, z: 5}` -> `{sum: 6}`
+1. x and y are not optional arguments
+    1. `{x: 4}` -> {message: The browser (or proxy) sent a request that this server could not understand.}
+1. x and y can be floats, but are interpreted as Math.floor(x) if positive and Math.ceil(x) if negative ("sum" is always an integer)
+    1. `{x: 2.5, y: 4}` -> `{sum: 6}`
+    1. `{x: -2.5, y: 4}` -> `{sum: 2}`
+    1. `{x: 2.5, y: -4.1}` -> `{sum: -2}`
+    1. `{x: 2.5, y: -4}` -> `{sum: -2}`
+    1. `{x: 2.5, y: -3.9}` -> `{sum: -1}`
+    1. `{x: -0.2, y: -2.8}` -> `{sum: -2}`
+    1. `{x: -0, y: -3}` -> `{sum: -3}`
+    1. `{x: 0.1, y: -3}` -> `{sum: -3}`
+1. x and y can be negative, but if between 1 and -1 must be of the form "-0.a" or "0.a"
+    1. `{x: -0.2, y: 1}` -> `{sum: 1}`
+    1. `{x: -0.2, y: 0.9}` -> `{sum: 0}`
+    1. `{x: -.2, y: 3}` -> `{message: The browser (or proxy) sent a request that this server could not understand.}`
+    1. `{x: .2, y: 3}` -> `{message: The browser (or proxy) sent a request that this server could not understand.}`
+1. x and y do not appear to have a length limit
+    1. `{x: 0.27397345098375098734059827350987, y: 3}` -> `{sum: 3}`
+    1. `{x: -0.27397345098375098734059827350987, y: 3}` -> `{sum: 3}`
+1. x or y <i>can</i> be strings, but only explicit whole number values
+    1. `{x: "4", y: 2}` -> `{sum: 6}`
+    1. `{x: "-4", y: 2}` -> `{sum: -2}`
+    1. `{x: "4.2", y: 2}` -> `{message: The browser (or proxy) sent a request that this server could not understand.}`
+    1. `{x: "-4.2", y: 2}` -> `{message: The browser (or proxy) sent a request that this server could not understand.}`
+    1. `{x: "d", y: 2}` -> `{message: The browser (or proxy) sent a request that this server could not understand.}`
