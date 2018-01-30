@@ -39,10 +39,11 @@ Through exploration with Postman, the original application appeared to have the 
 1. x and y do not appear to have a length limit
     1. `{x: 0.27397345098375098734059827350987, y: 3}` -> `{sum: 3}`
     1. `{x: -0.27397345098375098734059827350987, y: 3}` -> `{sum: 3}`
-1. x or y can be strings, but only non-decimal values. One can be a string while the other is a number so long as they meet the other requirements
+1. x or y can be strings, but only non-decimal values. One can be a string while the other is a number so long as they meet the other requirements. The string can have spaces.
     1. `{x: "4", y: 2}` -> `{sum: 6}`
     1. `{x: "-4", y: 2}` -> `{sum: -2}`
     1. `{x: 4.0, y: "2"}` -> `{sum: 6}`
+    1. `{x: 4.0, y: " 2 "}` -> `{sum: 6}`
     1. `{x: "4.0", y: 2}` -> `{message: The browser (or proxy) sent a request that this server could not understand.}`
     1. `{x: "4.2", y: 2}` -> `{message: The browser (or proxy) sent a request that this server could not understand.}`
     1. `{x: "-4.2", y: 2}` -> `{message: The browser (or proxy) sent a request that this server could not understand.}`

@@ -1,0 +1,146 @@
+
+
+SUITE 1
+
+
+
+start {"x": 4, "y": 2, "z": 3}
+{"sum": 6}
+{"sum":6}
+should be {"sum": 6}
+
+
+
+SUITE 2
+
+
+start {"x": 4}
+{"message": "The browser (or proxy) sent a request that this server could not understand."}
+{"message":"The browser (or proxy) sent a request that this server could not understand."}
+should be {"message": The browser (or proxy) sent a request that this server could not understand.}
+
+
+
+SUITE 3
+
+
+start {"x": 2.5, "y": 4}
+{"sum": 6}
+{"sum":6}
+should be {"sum": 6}
+
+start {"x": -2.5, "y": 4}
+{"sum": 2}
+{"sum":2}
+should be {"sum": 2}
+
+start {"x": 2.5, "y": -4.1}
+{"sum": -2}
+{"sum":-2}
+should be {"sum": -2}
+
+start {"x": 2.5, "y": -4}
+{"sum": -2}
+{"sum":-2}
+should be {"sum": -2}
+
+start {"x": 2.5, "y": -3.9}
+{"sum": -1}
+{"sum":-1}
+should be {"sum": -1}
+
+start {"x": -0.2, "y": -2.8}
+{"sum": -2}
+{"sum":-2}
+should be {"sum": -2}
+
+start {"x": -0, "y": -3}
+{"sum": -3}
+{"sum":-3}
+should be {"sum": -3}
+
+start {"x": 0.1, "y": -3}
+{"sum": -3}
+{"sum":-3}
+should be {"sum": -3}
+
+
+
+SUITE 4
+
+
+start {"x": -0.2, "y": 1}
+{"sum": 1}
+{"sum":1}
+should be {"sum": 1}
+
+start {"x": -0.2, "y": 0.9}
+{"sum": 0}
+{"sum":0}
+should be {"sum": 0}
+
+start {"x": -.2, "y": 3}
+{"message": "The browser (or proxy) sent a request that this server could not understand."}
+{"message":"The browser (or proxy) sent a request that this server could not understand."}
+should be {"message": The browser (or proxy) sent a request that this server could not understand.}
+
+start {"x": .2, "y": 3}
+{"message": "The browser (or proxy) sent a request that this server could not understand."}
+{"message":"The browser (or proxy) sent a request that this server could not understand."}
+should be {"message": The browser (or proxy) sent a request that this server could not understand.}
+
+
+
+SUITE 5
+
+
+start {"x": 0.27397345098375098734059827350987, "y": 3}
+{"sum": 3}
+{"sum":3}
+should be {"sum": 3}
+
+start {"x": -0.27397345098375098734059827350987, "y": 3}
+{"sum": 3}
+{"sum":3}
+should be {"sum": 3}
+
+
+
+SUITE 6
+
+
+start {"x": "4", "y": 2}
+{"sum": 6}
+{"sum":6}
+should be {"sum": 6}
+
+start {"x": "-4", "y": 2}
+{"sum": -2}
+{"sum":-2}
+should be {"sum": -2}
+
+start {"x": 4.0, "y": "2"}
+{"sum": 6}
+{"sum":6}
+should be {"sum": 6}
+
+start {"x": "4.0", "y": 2}
+{"message": "The browser (or proxy) sent a request that this server could not understand."}
+{"sum":6}
+should be {"message": The browser (or proxy) sent a request that this server could not understand.}
+
+start {"x": "4.2", "y": 2}
+{"message": "The browser (or proxy) sent a request that this server could not understand."}
+{"sum":6}
+should be {"message": The browser (or proxy) sent a request that this server could not understand.}
+
+start {"x": "-4.2", "y": 2}
+{"message": "The browser (or proxy) sent a request that this server could not understand."}
+{"sum":-2}
+should be {"message": The browser (or proxy) sent a request that this server could not understand.}
+
+start {"x": "d", "y": 2}
+{"message": "The browser (or proxy) sent a request that this server could not understand."}
+{"message":"The browser (or proxy) sent a request that this server could not understand."}
+should be {"message": The browser (or proxy) sent a request that this server could not understand.}
+

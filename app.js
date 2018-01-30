@@ -17,16 +17,33 @@ const app = express();
 
 // bodyparser to read x and y
 const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({extended: true}));
+// app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+app.use((error, req, res, next) => {
+  if (error) {
+    res.status(400).send({
+      message: `The browser (or proxy) sent a request that this server could not understand.`
+    })
+  }
+})
 
 // test route
 // takes "x", "y", sends back {sum: x+y}
 // see "Notes on the original application" in Readme for specific details
 app.post('/test', (req, res) => {
-  console.log(req.body.x, parseInt(req.body.x), typeof req.body.x);
-  console.log(req.body.y, parseInt(req.body.y), typeof req.body.y);
-  if (parseInt(req.body.x) && parseInt(req.body.y)) {
+  console.log(req.body);
+  console.log(parseInt(req.body.x), typeof parseInt(req.body.x), !isNaN(parseInt(req.body.x)));
+  console.log(parseInt(req.body.y), typeof parseInt(req.body.y), !isNaN(parseInt(req.body.y)));
+
+  // check if we have both x and y
+  let bool = req.body.x != null && req.body.y != null;
+  // check parseInt evaluates to a number
+  bool = bool && (typeof parseInt(req.body.x) == 'number') && (typeof parseInt(req.body.x) == 'number');
+  // check that number is actually a number, not NaN
+  bool = bool && !isNaN(parseInt(req.body.x)) && !isNaN(parseInt(req.body.y))
+
+  if (bool) {
     res.status(200).send({
       sum: parseInt(req.body.x) + parseInt(req.body.y)
     })
@@ -36,6 +53,7 @@ app.post('/test', (req, res) => {
       message: `The browser (or proxy) sent a request that this server could not understand.`
     })
   }
+  // res.send({check: 'check'})
 })
 
 
@@ -43,6 +61,14 @@ app.use('/test', (req, res) => {
   res.status(405).send({
     message: "The method is not allowed for the requested URL."
   })
+})
+
+app.use((error, req, res, next) => {
+  if (error) {
+    res.status(400).send({
+      message: `Error.`
+    })
+  }
 })
 
 // read port or set to 3000, launch server
