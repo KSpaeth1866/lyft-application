@@ -1,25 +1,12 @@
-/*
-
-Technical sample for Lyft application
-
-"A small web application in one of the above languages (Python/Ruby/Node).
-It only needs to accept a POST request to the route “/test” which accepts two
-arguments “x” and “y” and returns a JSON object {“sum”: x+y}."
-
-curl -X POST https://lyft-interview-test.herokuapp.com/test --data '{"x": 4, "y": 2}' -H 'Content-Type: application/json'
-curl -X POST http://localhost:3000/test --data '{"x": 4, "y": 2}' -H 'Content-Type: application/json'
-
-*/
-
 // express server
 const express = require('express');
 const app = express();
 
 // bodyparser to read x and y
 const bodyParser = require('body-parser');
-// app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+// catch json parsing errors
 app.use((error, req, res, next) => {
   if (error) {
     res.status(400).send({
@@ -28,19 +15,15 @@ app.use((error, req, res, next) => {
   }
 })
 
-// test route
 // takes "x", "y", sends back {sum: x+y}
 // see "Notes on the original application" in Readme for specific details
 app.post('/test', (req, res) => {
-  console.log(req.body);
-  console.log(parseInt(req.body.x), typeof parseInt(req.body.x), !isNaN(parseInt(req.body.x)));
-  console.log(parseInt(req.body.y), typeof parseInt(req.body.y), !isNaN(parseInt(req.body.y)));
 
   // check if we have both x and y
   let bool = req.body.x != null && req.body.y != null;
-  // check parseInt evaluates to a number
+  // check if parseInt of x, y evaluates to a number
   bool = bool && (typeof parseInt(req.body.x) == 'number') && (typeof parseInt(req.body.x) == 'number');
-  // check that number is actually a number, not NaN
+  // check that each parseInt-ed x, y is actually a number, not NaN
   bool = bool && !isNaN(parseInt(req.body.x)) && !isNaN(parseInt(req.body.y))
 
   if (bool) {
@@ -53,20 +36,20 @@ app.post('/test', (req, res) => {
       message: `The browser (or proxy) sent a request that this server could not understand.`
     })
   }
-  // res.send({check: 'check'})
 })
 
-
+// get/put/etc. do not result in anything
 app.use('/test', (req, res) => {
   res.status(405).send({
-    message: "The method is not allowed for the requested URL."
+    message: `The method is not allowed for the requested URL.`
   })
 })
 
+// catch other uncaught error
 app.use((error, req, res, next) => {
   if (error) {
     res.status(400).send({
-      message: `Error.`
+      message: `The browser (or proxy) experienced an error.`
     })
   }
 })

@@ -124,6 +124,11 @@ start {"x": 4.0, "y": "2"}
 {"sum":6}
 should be {"sum": 6}
 
+start {"x": 4.0, "y": " 2 "}
+{"sum": 6}
+{"sum":6}
+should be {"sum": 6}
+
 start {"x": "4.0", "y": 2}
 {"message": "The browser (or proxy) sent a request that this server could not understand."}
 {"sum":6}
@@ -143,4 +148,19 @@ start {"x": "d", "y": 2}
 {"message": "The browser (or proxy) sent a request that this server could not understand."}
 {"message":"The browser (or proxy) sent a request that this server could not understand."}
 should be {"message": The browser (or proxy) sent a request that this server could not understand.}
+
+
+
+SUITE 7
+
+
+get request {"x": 4, "y": 2}
+{"message": "The method is not allowed for the requested URL."}
+{"message":"The method is not allowed for the requested URL."}
+should be {"message": The method is not allowed for the requested URL.}
+
+put request {"x": 4, "y": 2}
+{"message": "The method is not allowed for the requested URL."}
+{"message":"The method is not allowed for the requested URL."}
+should be {"message": The method is not allowed for the requested URL.}
 

@@ -169,6 +169,13 @@ echo '
 should be {"sum": 6}
 ' >> test.txt;
 
+echo 'start {"x": 4.0, "y": " 2 "}' >> test.txt;
+curl -X POST https://lyft-interview-test.herokuapp.com/test --data '{"x": 4.0, "y": " 2 "}' -H 'Content-Type: application/json' >> test.txt;
+curl -X POST http://localhost:3000/test --data '{"x": 4.0, "y": " 2 "}' -H 'Content-Type: application/json' >> test.txt;
+echo '
+should be {"sum": 6}
+' >> test.txt;
+
 echo 'start {"x": "4.0", "y": 2}' >> test.txt;
 curl -X POST https://lyft-interview-test.herokuapp.com/test --data '{"x": "4.0", "y": 2}' -H 'Content-Type: application/json' >> test.txt;
 curl -X POST http://localhost:3000/test --data '{"x": "4.0", "y": 2}' -H 'Content-Type: application/json' >> test.txt;
@@ -195,4 +202,24 @@ curl -X POST https://lyft-interview-test.herokuapp.com/test --data '{"x": "d", "
 curl -X POST http://localhost:3000/test --data '{"x": "d", "y": 2}' -H 'Content-Type: application/json' >> test.txt;
 echo '
 should be {"message": The browser (or proxy) sent a request that this server could not understand.}
+' >> test.txt;
+
+echo '
+
+SUITE 7
+
+' >> test.txt;
+
+echo 'get request {"x": 4, "y": 2}' >> test.txt;
+curl -X GET https://lyft-interview-test.herokuapp.com/test --data '{"x": 4, "y": 2}' -H 'Content-Type: application/json' >> test.txt;
+curl -X GET http://localhost:3000/test --data '{"x": 4, "y": 2}' -H 'Content-Type: application/json' >> test.txt;
+echo '
+should be {"message": The method is not allowed for the requested URL.}
+' >> test.txt;
+
+echo 'put request {"x": 4, "y": 2}' >> test.txt;
+curl -X PUT https://lyft-interview-test.herokuapp.com/test --data '{"x": 4, "y": 2}' -H 'Content-Type: application/json' >> test.txt;
+curl -X PUT http://localhost:3000/test --data '{"x": 4, "y": 2}' -H 'Content-Type: application/json' >> test.txt;
+echo '
+should be {"message": The method is not allowed for the requested URL.}
 ' >> test.txt;
